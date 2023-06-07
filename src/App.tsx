@@ -1,12 +1,12 @@
 import React from 'react';
-import Cell from './component/Cell/Cell';
 import { RecoilRoot } from 'recoil';
+import SheetsContainer from './containers/SheetsContainer';
 
 function App() {
 
   return (
     <RecoilRoot>
-        <Cell>hello</Cell>
+        <SheetsContainer></SheetsContainer>
     </RecoilRoot>
   );
 }
