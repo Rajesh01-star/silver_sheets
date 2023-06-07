@@ -4,6 +4,7 @@ import Column from "../Column/Column";
 import Cell, { CELL_HEIGHT, CELL_WIDTH } from "../Cell/Cell";
 import { SheetSizeState } from "../../store/SheetSizeState";
 import { useRecoilState } from "recoil";
+import classes from "./Sheet.module.css";
 
 export type SheetProps = {}
 
@@ -13,7 +14,7 @@ const Sheet: FunctionComponent<SheetProps> = (props) =>{
     const numberOfRows = SheetSize[0].height/CELL_HEIGHT;
 
     return (
-        <table>
+        <table className={classes.Sheet}>
             <tbody>
                 {[...Array(numberOfRows)].map((row,rowIndex)=>(
                     <Row>

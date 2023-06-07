@@ -31,8 +31,8 @@ const Cell : FunctionComponent<CellProps> = (props)=>{
     },[]);
 
     return isEditMode ?
-    <input ref={inputRef} data-cell-id={props.cellId} value={cellValue} onChange={updateCellValueState} /> : 
-    <div data-cell-id={props.cellId} onClick={changeLabelToInput}>{cellValue}</div>
+    <input className={classes.CellInput} ref={inputRef} data-cell-id={props.cellId} value={cellValue} onChange={updateCellValueState} /> : 
+    <div className={classes.CellLabel} data-cell-id={props.cellId} onClick={changeLabelToInput}>{cellValue}</div>
 }
 
 export default Cell;
