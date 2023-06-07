@@ -6,6 +6,8 @@ import Cell, { CELL_HEIGHT, CELL_WIDTH } from "../Cell/Cell";
 import { SheetSizeState } from "../../store/SheetSizeState";
 import { useRecoilState } from "recoil";
 import classes from "./Sheet.module.css";
+import AxisCell from "../AxisCell/AxisCell";
+import { numberToChar } from "../../utils/numberToChar";
 
 export type SheetProps = {}
 
@@ -18,10 +20,17 @@ const Sheet: FunctionComponent<SheetProps> = (props) =>{
         <div className={classes.SheetWrapper}>
         <table className={classes.Sheet}>
             <tbody>
+                <Row>
+                    {[...Array(numberOfColumns+1)].map((column,columnIndex)=>(
+                       columnIndex !== 0 ?( <AxisCell>{numberToChar(columnIndex-1)}</AxisCell>):
+                       (<AxisCell> </AxisCell>)
+                    ))}
+                </Row>
                 {[...Array(numberOfRows)].map((row,rowIndex)=>(
-                    <Row>
+                    <Row key={rowIndex}>
+                        <AxisCell>{rowIndex +1}</AxisCell>
                         {[...Array(numberOfColumns)].map((column,columnIndex)=>(
-                            <Column>
+                            <Column key={columnIndex}>
                                 <Cell cellId={`${rowIndex},${columnIndex}`} />
                             </Column>
                         ))}
