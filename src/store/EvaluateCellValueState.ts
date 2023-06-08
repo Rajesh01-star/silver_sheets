@@ -2,7 +2,7 @@ import { selector } from "recoil";
 import { memorize } from "../utils/memorize";
 import { CellValueState } from "./CellValueState";
 import { evaluate } from "mathjs";
-// import { getEquationExpressionFromState } from "../utils/getEquationExpressionFromState";
+import { getEquationExpressionFromState } from "../utils/getEquationExpressionFromState";
 
 export const EvaluatedCellValueState = <T> (cellId: string) =>
   memorize(`evaluatedCell_${cellId}`, () =>
@@ -12,7 +12,11 @@ export const EvaluatedCellValueState = <T> (cellId: string) =>
         const value = get(CellValueState(cellId)) as string;
         if(value.startsWith("=")){
             try{
-                return evaluate(value.slice(1))
+                const evaluatedExpression = getEquationExpressionFromState(get,value.slice(1))
+                if(evaluatedExpression === "!ERROR"){
+                  return "!ERROR";
+                }
+                return evaluate(evaluatedExpression)
             }catch{
                 return value;
             }
