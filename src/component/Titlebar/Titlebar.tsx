@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useState } from "react";
+import { saveAs } from "file-saver";
 import { parseExcelFile } from "../../utils/parseExcelfile";
 import { CellValueState } from "../../store/CellValueState";
 import useUpdateCellValues from "../../store/updateCellValueState";
@@ -14,11 +15,14 @@ const Titlebar: FunctionComponent<TitlebarProps> = ({ onUploadSheet }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [range, setRange] = useState<string[]>([]);
 
-  const logNonEmptyCellValues = useLogNonEmptyCellValues(range);
+const logNonEmptyCellValues = useLogNonEmptyCellValues(range);
 
 React.useEffect(() => {
   if (range.length > 0) {
-    logNonEmptyCellValues();
+    const csvString = logNonEmptyCellValues();
+    // Download the CSV file
+    const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8' });
+    saveAs(blob, 'cell_values.csv');
   }
 }, [range]);
 

@@ -4,16 +4,20 @@ import { useRecoilSnapshot } from 'recoil';
 const useLogNonEmptyCellValues = (cellIds: string[]) => {
   const snapshot = useRecoilSnapshot();
 
-  const logNonEmptyCellValues = () => {
+  const generateCsvString = () => {
+    let csvString = '';
+
     cellIds.forEach((cellId: string) => {
       const value = snapshot.getLoadable(CellValueState(cellId)).contents;
       if (value !== '') {
-        console.log(`Cell ${cellId}: ${value}`);
+        csvString += `${cellId},${value}\n`;
       }
     });
+
+    return csvString;
   };
 
-  return logNonEmptyCellValues;
+  return generateCsvString;
 };
 
 const generateCellIdsInRange = (start: string, end: string): string[] => {
