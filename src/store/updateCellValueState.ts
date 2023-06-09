@@ -10,7 +10,7 @@ const useUpdateCellValues = () => {
     sheetDataArray.forEach((rowData: any[]) => {
       rowData.forEach((cellData: { cellId: string; value: any }) => {
         const { cellId, value } = cellData;
-        console.log(cellId, value);
+        // console.log(cellId, value);
         setCellValue(cellId, value);
       });
     });

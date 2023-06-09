@@ -16,4 +16,21 @@ const useLogNonEmptyCellValues = (cellIds: string[]) => {
   return logNonEmptyCellValues;
 };
 
+const generateCellIdsInRange = (start: string, end: string): string[] => {
+    const [startRow, startCol] = start.split(',').map(Number);
+    const [endRow, endCol] = end.split(',').map(Number);
+  
+    const cellIds = [];
+  
+    for (let row = startRow; row <= endRow; row++) {
+      for (let col = startCol; col <= endCol; col++) {
+        cellIds.push(`${row},${col}`);
+      }
+    }
+  
+    return cellIds;
+  };
+
+export {generateCellIdsInRange};
+
 export default useLogNonEmptyCellValues;

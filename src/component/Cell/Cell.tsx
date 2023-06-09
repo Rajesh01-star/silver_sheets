@@ -18,6 +18,7 @@ import React, {
   export type CellProps = {
     cellId: string;
   };
+
   
   const Cell: FunctionComponent<CellProps> = (props) => {
     const [cellValue, setCellValue] = useRecoilState<string>(
@@ -26,6 +27,7 @@ import React, {
     const evaluatedCellValueState = useRecoilValue<string>(
       EvaluatedCellValueState(props.cellId)
     );
+    
   
     const [isEditMode, setIsEditMode] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);

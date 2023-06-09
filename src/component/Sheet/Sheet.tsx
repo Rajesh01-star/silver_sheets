@@ -18,12 +18,12 @@ const Sheet: FunctionComponent<SheetProps> = (props) =>{
 
     return (
         <div className={classes.SheetWrapper}>
-        <table className={classes.Sheet}>
-            <tbody>
+        <table>
+            <tbody className={classes.Sheet}>
                 <Row>
                     {[...Array(numberOfColumns+1)].map((column,columnIndex)=>(
-                       columnIndex !== 0 ?( <AxisCell>{numberToChar(columnIndex-1)}</AxisCell>):
-                       (<AxisCell> </AxisCell>)
+                       columnIndex !== 0 ?( <AxisCell key={columnIndex}>{numberToChar(columnIndex-1)}</AxisCell>):
+                       (<AxisCell key={columnIndex}> </AxisCell>)
                     ))}
                 </Row>
                 {[...Array(numberOfRows)].map((row,rowIndex)=>(

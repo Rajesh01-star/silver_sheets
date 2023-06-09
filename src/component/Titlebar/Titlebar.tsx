@@ -2,7 +2,8 @@ import React, { FunctionComponent, useState } from "react";
 import { parseExcelFile } from "../../utils/parseExcelfile";
 import { CellValueState } from "../../store/CellValueState";
 import useUpdateCellValues from "../../store/updateCellValueState";
-import useLogNonEmptyCellValues from "../../utils/downloadSheet";
+import useLogNonEmptyCellValues,{generateCellIdsInRange} from "../../utils/downloadSheet";
+
 
 export type TitlebarProps = {
   onUploadSheet: (file: File) => void;
@@ -11,6 +12,28 @@ export type TitlebarProps = {
 const Titlebar: FunctionComponent<TitlebarProps> = ({ onUploadSheet }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [range, setRange] = useState<string[]>([]);
+
+  const logNonEmptyCellValues = useLogNonEmptyCellValues(range);
+
+React.useEffect(() => {
+  if (range.length > 0) {
+    logNonEmptyCellValues();
+  }
+}, [range]);
+
+const handleDownloadSheet = () => {
+  const inputStartCellId = window.prompt("Enter the starting cell ID:");
+  const inputEndCellId = window.prompt("Enter the ending cell ID:");
+
+  // Assign default values if user cancels or leaves the prompts empty
+  const updatedStartCellId = inputStartCellId || '';
+  const updatedEndCellId = inputEndCellId || '';
+
+  const result = generateCellIdsInRange(updatedStartCellId, updatedEndCellId);
+  setRange(result);
+};
+
 
   const handleUploadClick = () => {
     setIsModalOpen(true);
@@ -21,14 +44,7 @@ const Titlebar: FunctionComponent<TitlebarProps> = ({ onUploadSheet }) => {
     setSelectedFile(file);
   };
 
-
-  const logNonEmptyCellValues = useLogNonEmptyCellValues(["1,1","1,2","1,3"]);
-
-  const handleDownloadSheet = () => {
-    logNonEmptyCellValues();
-  };
   
-
   const updateCellValues = useUpdateCellValues();
 
   const handleUploadSheet = async () => {
