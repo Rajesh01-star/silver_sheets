@@ -12,7 +12,7 @@ export type TitlebarProps = {
 
 const Titlebar: FunctionComponent<TitlebarProps> = ({ onUploadSheet }) => {
 
-  const defaultHeadingText = "Editable Heading";
+  const defaultHeadingText = "Untitled";
   const [headingText, setHeadingText] = useState(defaultHeadingText);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
