@@ -8,9 +8,10 @@ const Bottombar: FunctionComponent<BottombarProps> = () => {
     return(
         <section className="flex justify-between h-16 sticky bottom-0 mt-4 bg-white shadow-lg">
       <ul className="flex justify-start gap-x-10 items-center w-64 mx-10">
-        <li>
+        <a href="https://github.com/Rajesh01-star/silver_sheets" target="_bla
+        " rel="noopener noreferrer">
           <BsGithub className="text-4xl hover:text-green-400 cursor-pointer transition-colors" />
-        </li>
+        </a>
         <a href="https://arvpanda-homepage.vercel.app/" target="_blank" rel="noopener noreferrer">
             <BsPersonFill className="text-4xl hover:text-green-400 transition-colors cursor-pointer" />
         </a>
