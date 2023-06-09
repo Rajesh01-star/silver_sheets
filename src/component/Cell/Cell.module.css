@@ -13,5 +13,6 @@
     white-space: nowrap;
     overflow: auto;
     line-height: 19px;
-    padding: 2px;
+    padding: 2px 5px;
+    overflow-x: hidden;
 }

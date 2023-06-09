@@ -9,20 +9,22 @@ export const EvaluatedCellValueState = <T> (cellId: string) =>
     selector({
       key: `evaluatedCell_${cellId}`,
       get: ({ get }) => {
-        const value = get(CellValueState(cellId)) as string;
-        if(value.startsWith("=")){
-            try{
-                const evaluatedExpression = getEquationExpressionFromState(get,value.slice(1))
-                if(evaluatedExpression === "!ERROR"){
-                  return "!ERROR";
-                }
-                return evaluate(evaluatedExpression)
-            }catch{
-                return value;
+        const value = get(CellValueState(cellId));
+        if (typeof value === "string" && value.startsWith("=")) {
+          try {
+            const evaluatedExpression = getEquationExpressionFromState(
+              get,
+              value.slice(1)
+            );
+            if (evaluatedExpression === "!ERROR") {
+              return "!ERROR";
             }
+            return evaluate(evaluatedExpression);
+          } catch {
+            return value;
+          }
         }
-        return value
-        
+        return value;
       }
     })
   );
