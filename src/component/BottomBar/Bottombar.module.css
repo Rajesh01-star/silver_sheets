@@ -1,0 +1,17 @@
+.marquee {
+    white-space: nowrap;
+  }
+  
+  @keyframes marquee {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-1800%);
+    }
+  }
+  
+  .animateMarquee {
+    animation: marquee 10s linear infinite;
+  }
+  

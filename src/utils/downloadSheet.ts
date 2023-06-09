@@ -1,7 +1,7 @@
 import { CellValueState } from '../store/CellValueState';
 import { useRecoilSnapshot } from 'recoil';
 
-const useLogNonEmptyCellValues = (cellIds: string[]) => {
+const useDownloadSheet = (cellIds: string[]) => {
   const snapshot = useRecoilSnapshot();
 
   const generateCsvString = () => {
@@ -37,4 +37,4 @@ const generateCellIdsInRange = (start: string, end: string): string[] => {
 
 export {generateCellIdsInRange};
 
-export default useLogNonEmptyCellValues;
+export default useDownloadSheet;

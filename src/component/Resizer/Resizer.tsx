@@ -2,7 +2,6 @@ import React,{ FunctionComponent, ReactNode, useEffect} from "react";
 import classes from "./Resizer.module.css"
 import { useRecoilState } from "recoil";
 import { SheetSizeState } from "../../store/SheetSizeState";
-
 export type ResizerProps = {}
 
 const Resizer: FunctionComponent<ResizerProps> = (props) =>{
